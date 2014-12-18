@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +17,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import constants.ButtonConstants;
+import constants.FieldConstants;
+import constants.LabelConstants;
+
 @SuppressWarnings("serial")
 public class Gui extends JFrame {
 
@@ -28,18 +31,28 @@ public class Gui extends JFrame {
 	private Dimension oldDimension;
 	private JPanel menuPanel;
 	private JLabel courseLabel;
-	private JTextField courseField;
 	private JLabel fileNameLabel;
+	private JTextField courseField;
 	private JTextField fileNameField;
 	
 	private boolean fullScreen;
 	
+	
+	private JLabel labels[];
+	private JButton buttons[];
+	private JTextField fields[];
 
 	public Gui() {
 		fullScreen = false;
+		
+		labels = new JLabel[20];
+		buttons = new JButton[20];
+		fields = new JTextField[20];
+		
 		setUpGui();
 		saveDimension();
 		getFocusToTextField();
+		
 	}
 
 	private void getFocusToTextField() {
@@ -94,19 +107,27 @@ public class Gui extends JFrame {
 //		leftPanel.setBackground(Color.GREEN);
 
 		JLabel label = new JLabel("Press F10 to hide menu");
+		labels[LabelConstants.PRESS_F10_LABEL] = label;
+		
 		Font labelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 11);
 		label.setFont(labelFont);
 		menuPanel = new JPanel();
 		menuPanel.setLayout(new GridLayout(1, 3));
 		saveButton = new JButton("Save");
+		buttons[ButtonConstants.SAVE_BUTTON] = saveButton;
 		toggleFullScreenButton = new JButton("Fullscreen");
+		buttons[ButtonConstants.FULLSCREEN_BUTTON] = toggleFullScreenButton;
 		saveButton.setFocusable(false);
 		toggleFullScreenButton.setFocusable(false);
 
 		courseField = new JTextField(8);
+		fields[FieldConstants.COURSE_FIELD] = courseField;
 		courseLabel = new JLabel("Kurs:", SwingConstants.RIGHT);
+		labels[LabelConstants.COURSE_LABEL] = courseLabel;
 		fileNameLabel = new JLabel("Filnamn:", SwingConstants.RIGHT);
+		labels[LabelConstants.FILENAME_LABEL] = fileNameLabel;
 		fileNameField = new JTextField(8);
+		fields[FieldConstants.FILENAME_FIELD] = fileNameField;
 		
 		leftPanel.add(courseLabel);
 		leftPanel.add(courseField);
@@ -127,7 +148,19 @@ public class Gui extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
+	
+	public JLabel[] getLabels() {
+		return labels;
+	}
 
+	public JButton[] getButtons() {
+		return buttons;
+	}
+	
+	public JTextField[] getFields() {
+		return fields;
+	}
+	
 	public TextField getTextField() {
 		return textField;
 	}
@@ -144,19 +177,5 @@ public class Gui extends JFrame {
 		oldDimension = getSize();
 	}
 	
-	public JButton getSaveButton() {
-		return saveButton;
-	}
-	
-	public JButton getToggleFullScreenButton() {
-		return toggleFullScreenButton;
-	}
 
-	public JTextField getCourseField() {
-		return courseField;
-	}
-	
-	public JTextField getFileNameField() {
-		return fileNameField;
-	}
 }

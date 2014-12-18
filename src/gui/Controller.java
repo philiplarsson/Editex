@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import constants.ButtonConstants;
 import listeners.SaveButtonListener;
 import listeners.ToggleFullScreenListener;
 
@@ -23,14 +24,16 @@ public class Controller {
 	private JButton toggleFullScreenButton;
 	private JPanel menuPanel;
 
+	private JButton[] buttons;
 	private static final double SIDE_SCALE = 0.15;
 
 	public Controller(Gui gui) {
 		this.gui = gui;
+		buttons = gui.getButtons();
 		textField = gui.getTextField();
-		saveButton = gui.getSaveButton();
+		saveButton = buttons[ButtonConstants.SAVE_BUTTON];
 		menuPanel = gui.getMenuPanel();
-		toggleFullScreenButton = gui.getToggleFullScreenButton();
+		toggleFullScreenButton = buttons[ButtonConstants.FULLSCREEN_BUTTON];
 		init();
 	}
 

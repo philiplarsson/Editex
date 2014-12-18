@@ -9,17 +9,21 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import constants.FieldConstants;
+
 public class SaveButtonListener implements ActionListener {
 	
 	private Gui gui;
+	private JTextField fields[];
 	private JTextField fileNameField;
 	private JTextField courseNameField;
 	private FileSaver fileSaver;
 	
 	public SaveButtonListener(Gui gui) {
 		this.gui = gui;
-		fileNameField = gui.getFileNameField();
-		courseNameField = gui.getCourseField();
+		fields = gui.getFields();
+		fileNameField = fields[FieldConstants.FILENAME_FIELD];
+		courseNameField = fields[FieldConstants.COURSE_FIELD];
 	}
 
 	@Override

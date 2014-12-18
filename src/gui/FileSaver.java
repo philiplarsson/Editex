@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 
 public class FileSaver {
 
+	@SuppressWarnings("unused")
 	private String fileName;
 	private PrintWriter printWriter;
 	
