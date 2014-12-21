@@ -10,26 +10,30 @@ public class FileSaver {
 	@SuppressWarnings("unused")
 	private String fileName;
 	private PrintWriter printWriter;
-	
+
 	public FileSaver(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public void createFile(String fileName) {
 		try {
 			printWriter = new PrintWriter(fileName, "UTF-8");
+			System.out.println("Status efter: " + fileExists(fileName));
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			System.err.println("Could not create printwriter.");
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void saveFile(String content) {
 		printWriter.write(content);
 		printWriter.close();
 	}
-	
+
 	public boolean fileExists(String fileName) {
 		File file = new File(fileName);
 		if (file.exists())
 			return true;
-		return false;		
+		return false;
 	}
 }

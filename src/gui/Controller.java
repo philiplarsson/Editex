@@ -10,11 +10,10 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import constants.ButtonConstants;
 import listeners.SaveButtonListener;
 import listeners.ToggleFullScreenListener;
+import constants.ButtonConstants;
 
 public class Controller {
 
