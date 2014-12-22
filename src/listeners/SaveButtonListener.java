@@ -2,6 +2,7 @@ package listeners;
 
 import gui.FileSaver;
 import gui.Gui;
+import gui.Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +19,7 @@ public class SaveButtonListener implements ActionListener {
 	private JTextField fileNameField;
 	private JTextField courseNameField;
 	private FileSaver fileSaver;
-
+	
 	private static final String FILE_NAME_ENDING = ".txt";
 
 	public SaveButtonListener(Gui gui) {
@@ -53,7 +54,7 @@ public class SaveButtonListener implements ActionListener {
 
 		String newFileName = courseNameField.getText() + "-"
 				+ fileNameField.getText() + FILE_NAME_ENDING;
-		fileSaver = new FileSaver(newFileName);
+		fileSaver = new FileSaver(Main.LINK_FILE);
 		if (fileSaver.fileExists(newFileName)) {
 			int answer = JOptionPane.showConfirmDialog(null, "File ''"
 					+ newFileName + "'' already exists. Overwrite? ", "Oops",
@@ -67,7 +68,7 @@ public class SaveButtonListener implements ActionListener {
 			fileSaver.createFile(newFileName);
 		}
 //		System.out.println(gui.getTextField().getText());
-		fileSaver.saveFile(gui.getTextField().getText());
+		fileSaver.saveToFile(gui.getTextField().getText(), newFileName);
 //		System.out.println("I should save this file as: " + newFileName);
 
 	}

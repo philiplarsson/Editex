@@ -7,25 +7,31 @@ import java.io.UnsupportedEncodingException;
 
 public class FileSaver {
 
-	@SuppressWarnings("unused")
-	private String fileName;
 	private PrintWriter printWriter;
-
-	public FileSaver(String fileName) {
-		this.fileName = fileName;
+	private LinkHandler linkHandler;
+	@SuppressWarnings("unused")
+	private String linkFile;
+	
+	public FileSaver(String linkFile) {
+		this.linkFile = linkFile;
+		if (!fileExists(linkFile)) {
+			createFile(linkFile);
+		}
+		linkHandler = new LinkHandler(linkFile);
 	}
 
 	public void createFile(String fileName) {
 		try {
 			printWriter = new PrintWriter(fileName, "UTF-8");
-			System.out.println("Status efter: " + fileExists(fileName));
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			System.err.println("Could not create printwriter.");
 			e.printStackTrace();
 		}
 	}
 
-	public void saveFile(String content) {
+	public void saveToFile(String content, String fileName) {
+		createFile(fileName);
+		linkHandler.addLink(fileName);
 		printWriter.write(content);
 		printWriter.close();
 	}
