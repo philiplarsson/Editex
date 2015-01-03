@@ -10,10 +10,12 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import listeners.SaveButtonListener;
 import listeners.ToggleFullScreenListener;
 import constants.ButtonConstants;
+import constants.FieldConstants;
 
 public class Controller {
 
@@ -22,28 +24,36 @@ public class Controller {
 	private JButton saveButton;
 	private JButton toggleFullScreenButton;
 	private JPanel menuPanel;
-
+	private JTextField fileNameField;
+	
 	private JButton[] buttons;
+	private JTextField[] textFields;
+	
 	private static final double SIDE_SCALE = 0.15;
 
 	public Controller(Gui gui) {
 		this.gui = gui;
+		
 		buttons = gui.getButtons();
+		textFields = gui.getFields();
 		textField = gui.getTextField();
 		saveButton = buttons[ButtonConstants.SAVE_BUTTON];
 		menuPanel = gui.getMenuPanel();
+		fileNameField = textFields[FieldConstants.FILENAME_FIELD];
 		toggleFullScreenButton = buttons[ButtonConstants.FULLSCREEN_BUTTON];
 		init();
 	}
 
 	private void init() {
+		SaveButtonListener sbl = new SaveButtonListener(gui);
 		gui.addComponentListener(new SizeListener());
 		textField.addKeyListener(new SmallKeyListener());
-		saveButton.addActionListener(new SaveButtonListener(gui));
+		saveButton.addActionListener(sbl);
 		toggleFullScreenButton.addActionListener(new ToggleFullScreenListener(
 				this));
 		menuPanel.addKeyListener(new SmallKeyListener());
 		gui.addKeyListener(new SmallKeyListener());
+		fileNameField.addActionListener(sbl);
 	}
 
 	public void toogleFullScreen() {

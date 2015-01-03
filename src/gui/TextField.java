@@ -36,9 +36,18 @@ public class TextField extends JTextPane {
 	}
 
 	public void fillGiberish() {
+		
 		Random rng = new Random();
 		StringBuilder sb = new StringBuilder();
-		for (int i = 100; i < 350; ++i) {
+		sb.append("+h1 Föreläsning # h1+ \n");
+		sb.append("Line +hr \n");
+		sb.append("This is some fancy Text. \n");
+
+		sb.append("This is +st bold st+. \n");
+
+		sb.append("And +i this i+ is +i italic i+. \n");
+
+		for (int i = 100; i < 35; ++i) {
 			sb.append(rng.nextInt(i) + " ");
 		}
 		setText(sb.toString());
