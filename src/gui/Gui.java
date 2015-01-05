@@ -24,10 +24,11 @@ import constants.LabelConstants;
 @SuppressWarnings("serial")
 public class Gui extends JFrame {
 
-	private static final String TITLE = "Editex";
+	private static final String TITLE = "EdiOtex";
 	private TextField textField;
 	private JButton saveButton;
 	private JButton toggleFullScreenButton;
+	private JButton indexButton;
 	private Dimension oldDimension;
 	private JPanel menuPanel;
 	private JLabel courseLabel;
@@ -46,7 +47,7 @@ public class Gui extends JFrame {
 		fullScreen = false;
 		
 		labels = new JLabel[20];
-		buttons = new JButton[20];
+		buttons = new JButton[10];
 		fields = new JTextField[20];
 		
 		setUpGui();
@@ -102,7 +103,8 @@ public class Gui extends JFrame {
 
 		// Top Menu
 		JPanel leftPanel = new JPanel(new GridLayout(2,2));
-		JPanel centerPanel = new JPanel();
+//		JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 1, 1));
+		JPanel centerPanel = new JPanel(new GridLayout(2,2));
 		JPanel rightPanel = new JPanel(new GridBagLayout());
 //		leftPanel.setBackground(Color.GREEN);
 
@@ -117,8 +119,11 @@ public class Gui extends JFrame {
 		buttons[ButtonConstants.SAVE_BUTTON] = saveButton;
 		toggleFullScreenButton = new JButton("Fullscreen");
 		buttons[ButtonConstants.FULLSCREEN_BUTTON] = toggleFullScreenButton;
+		indexButton = new JButton("Index Files");
+		buttons[ButtonConstants.INDEXING_BUTTON] = indexButton;
 		saveButton.setFocusable(false);
 		toggleFullScreenButton.setFocusable(false);
+		indexButton.setFocusable(false);
 
 		courseField = new JTextField(8);
 		fields[FieldConstants.COURSE_FIELD] = courseField;
@@ -135,6 +140,7 @@ public class Gui extends JFrame {
 		leftPanel.add(fileNameField);
 		centerPanel.add(saveButton);
 		centerPanel.add(toggleFullScreenButton);
+		centerPanel.add(indexButton);
 		rightPanel.add(label);
 		menuPanel.add(leftPanel);
 		menuPanel.add(centerPanel);

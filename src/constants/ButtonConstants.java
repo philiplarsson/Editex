@@ -13,4 +13,6 @@ public final class ButtonConstants {
 	 */
 	public static final int FULLSCREEN_BUTTON = 2;
 		
+	public static final int INDEXING_BUTTON = 3;
+	
 }

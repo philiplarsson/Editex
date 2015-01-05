@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import listeners.IndexButtonListener;
 import listeners.SaveButtonListener;
 import listeners.ToggleFullScreenListener;
 import constants.ButtonConstants;
@@ -23,6 +24,7 @@ public class Controller {
 	private TextField textField;
 	private JButton saveButton;
 	private JButton toggleFullScreenButton;
+	private JButton indexButton;
 	private JPanel menuPanel;
 	private JTextField fileNameField;
 	
@@ -38,9 +40,11 @@ public class Controller {
 		textFields = gui.getFields();
 		textField = gui.getTextField();
 		saveButton = buttons[ButtonConstants.SAVE_BUTTON];
+		toggleFullScreenButton = buttons[ButtonConstants.FULLSCREEN_BUTTON];
+		indexButton = buttons[ButtonConstants.INDEXING_BUTTON];
 		menuPanel = gui.getMenuPanel();
 		fileNameField = textFields[FieldConstants.FILENAME_FIELD];
-		toggleFullScreenButton = buttons[ButtonConstants.FULLSCREEN_BUTTON];
+		
 		init();
 	}
 
@@ -51,6 +55,7 @@ public class Controller {
 		saveButton.addActionListener(sbl);
 		toggleFullScreenButton.addActionListener(new ToggleFullScreenListener(
 				this));
+		indexButton.addActionListener(new IndexButtonListener());
 		menuPanel.addKeyListener(new SmallKeyListener());
 		gui.addKeyListener(new SmallKeyListener());
 		fileNameField.addActionListener(sbl);

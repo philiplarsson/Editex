@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class FileHandler {
 
@@ -19,7 +22,6 @@ public class FileHandler {
 	 *             if the folder couldn't be created.
 	 */
 	public void createFolder(String folderName) throws IOException {
-		System.out.println("Creating folder " + folderName + ". ");
 		File dir = new File(folderName);
 		boolean result = dir.mkdir();
 		if (!result) {
@@ -58,8 +60,8 @@ public class FileHandler {
 	public boolean fileExists(String fileName) {
 		File file = new File(fileName);
 		Path path = file.toPath();
-		System.out.println("Checking if file: '" + path.toString()
-				+ "' exists.");
+		// System.out.println("Checking if file: '" + path.toString()
+		// + "' exists.");
 		return Files.exists(path, LinkOption.NOFOLLOW_LINKS);
 
 	}
@@ -90,4 +92,8 @@ public class FileHandler {
 		fs.close();
 	}
 
+	public List<String> readLines(String fileName) throws IOException {
+		Path path = Paths.get(fileName);
+		return Files.readAllLines(path, Charset.forName("UTF-8"));
+	}
 }
