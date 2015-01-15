@@ -10,7 +10,7 @@ public class Indexer {
 
 	private FileHandler fileHandler;
 	private List<String> lines;
-	
+
 	public Indexer() {
 		fileHandler = new FileHandler();
 	}
@@ -21,9 +21,21 @@ public class Indexer {
 			throw new FileNotFoundException("Could not find linkfile " + SaveButtonListener.LINK_FILE);
 		}
 		lines = fileHandler.readLines(SaveButtonListener.LINK_FILE);
-		for (String line : lines) {
-			System.out.println(line);
+		
+		removeBeginAndEnd();
+	}
+	
+	private void removeBeginAndEnd() {
+		for (int i = 0; i < lines.size(); i++) {
+			if (lines.get(i).contains("BEGIN") || lines.get(i).contains("END")) {
+				lines.remove(i);
+				--i;
+			}
 		}
+	}
+	
+	public List<String> getLinks() {
+		return lines;
 	}
 	
 }

@@ -105,7 +105,7 @@ public class SaveButtonListener implements ActionListener {
 			fileHandler.writeToFile(entireFileName + FILE_NAME_ENDING_RAW, text, false);
 			fileHandler.writeToFile(entireFileName + ".html", htmlText , false);
 			
-			linkHandler.addLink(fileAndCourseName + ".html");
+			linkHandler.addLinkToLinkFile(fileAndCourseName + ".html");
 		} catch (IOException e) {
 			System.err.println("Could not save to file " + fileAndCourseName);
 			e.printStackTrace();

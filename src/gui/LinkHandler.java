@@ -45,7 +45,7 @@ public class LinkHandler {
 	 * @param fileName
 	 *            the String to be added.
 	 */
-	public void addLink(String fileName) {
+	public void addLinkToLinkFile(String fileName) {
 		String parts[] = fileName.split("-");
 		String courseName = parts[0];
 
