@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class FileHandler {
@@ -95,5 +96,24 @@ public class FileHandler {
 	public List<String> readLines(String fileName) throws IOException {
 		Path path = Paths.get(fileName);
 		return Files.readAllLines(path, Charset.forName("UTF-8"));
+	}
+
+	/**
+	 * Copy file from resources folder to specified destination.
+	 * @param resourceFile is the resource file name.
+	 * @param destination is the destination.
+	 * @throws IOException if copy was unsuccesfull.
+	 */
+	public void copyFileFromResources(String resourceFile, String destination) throws IOException {
+			File dest = new File(destination);
+
+			ClassLoader classLoader = getClass().getClassLoader();
+			File source = new File(classLoader.getResource(resourceFile)
+					.getFile());
+
+			Files.copy(source.toPath(), dest.toPath(),
+					StandardCopyOption.REPLACE_EXISTING);
+
+		
 	}
 }

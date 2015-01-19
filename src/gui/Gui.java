@@ -35,25 +35,24 @@ public class Gui extends JFrame {
 	private JLabel fileNameLabel;
 	private JTextField courseField;
 	private JTextField fileNameField;
-	
+
 	private boolean fullScreen;
-	
-	
+
 	private JLabel labels[];
 	private JButton buttons[];
 	private JTextField fields[];
 
 	public Gui() {
 		fullScreen = false;
-		
+
 		labels = new JLabel[20];
 		buttons = new JButton[10];
 		fields = new JTextField[20];
-		
+
 		setUpGui();
 		saveDimension();
 		getFocusToTextField();
-		
+
 	}
 
 	private void getFocusToTextField() {
@@ -62,7 +61,7 @@ public class Gui extends JFrame {
 			@Override
 			public void run() {
 				textField.requestFocus();
-//				textField.grabFocus();
+				// textField.grabFocus();
 			}
 
 		});
@@ -75,11 +74,11 @@ public class Gui extends JFrame {
 	public void setFullScreen(boolean fullScreen) {
 		this.fullScreen = fullScreen;
 	}
-	
+
 	public boolean menuIsShowing() {
 		return menuPanel.isVisible();
 	}
-	
+
 	public void showMenu(boolean bool) {
 		menuPanel.setVisible(bool);
 	}
@@ -102,15 +101,16 @@ public class Gui extends JFrame {
 		add(scrollPane, BorderLayout.CENTER);
 
 		// Top Menu
-		JPanel leftPanel = new JPanel(new GridLayout(2,2));
-//		JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 1, 1));
-		JPanel centerPanel = new JPanel(new GridLayout(2,2));
+		JPanel leftPanel = new JPanel(new GridLayout(2, 2));
+		// JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 1,
+		// 1));
+		JPanel centerPanel = new JPanel(new GridLayout(2, 2));
 		JPanel rightPanel = new JPanel(new GridBagLayout());
-//		leftPanel.setBackground(Color.GREEN);
+		// leftPanel.setBackground(Color.GREEN);
 
 		JLabel label = new JLabel("Press F10 to hide menu");
 		labels[LabelConstants.PRESS_F10_LABEL] = label;
-		
+
 		Font labelFont = new Font(Font.SANS_SERIF, Font.PLAIN, 11);
 		label.setFont(labelFont);
 		menuPanel = new JPanel();
@@ -133,7 +133,7 @@ public class Gui extends JFrame {
 		labels[LabelConstants.FILENAME_LABEL] = fileNameLabel;
 		fileNameField = new JTextField(8);
 		fields[FieldConstants.FILENAME_FIELD] = fileNameField;
-		
+
 		leftPanel.add(courseLabel);
 		leftPanel.add(courseField);
 		leftPanel.add(fileNameLabel);
@@ -145,7 +145,7 @@ public class Gui extends JFrame {
 		menuPanel.add(leftPanel);
 		menuPanel.add(centerPanel);
 		menuPanel.add(rightPanel);
-		
+
 		add(menuPanel, BorderLayout.PAGE_START);
 
 		pack();
@@ -154,7 +154,7 @@ public class Gui extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	
+
 	public JLabel[] getLabels() {
 		return labels;
 	}
@@ -162,11 +162,11 @@ public class Gui extends JFrame {
 	public JButton[] getButtons() {
 		return buttons;
 	}
-	
+
 	public JTextField[] getFields() {
 		return fields;
 	}
-	
+
 	public TextField getTextField() {
 		return textField;
 	}
@@ -182,6 +182,5 @@ public class Gui extends JFrame {
 	public void saveDimension() {
 		oldDimension = getSize();
 	}
-	
 
 }

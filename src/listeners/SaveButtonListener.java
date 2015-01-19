@@ -18,7 +18,6 @@ import constants.FieldConstants;
 public class SaveButtonListener implements ActionListener {
 
 	public final static String LINK_FILE = "linkFile.conf";
-//	private static final String FILE_NAME_ENDING = ".txt";
 	private static final String FILE_NAME_ENDING_RAW = ".raw";
 	
 	private Gui gui;
@@ -99,6 +98,7 @@ public class SaveButtonListener implements ActionListener {
 			}
 		}
 		String text = gui.getTextField().getText();
+		text = text.replace("\n", "<br> \n");
 		String convertedText = converter.convert(text);
 		String htmlText = Htmlifyer.htmlIfyText(convertedText, fileAndCourseName);
 		try {

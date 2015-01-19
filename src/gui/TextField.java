@@ -35,6 +35,9 @@ public class TextField extends JTextPane {
 				topBottomPadding, sidePadding));
 	}
 
+	/**
+	 * Test method that fills the TextField with some text and random numbers.
+	 */
 	public void fillGiberish() {
 		
 		Random rng = new Random();
@@ -47,7 +50,7 @@ public class TextField extends JTextPane {
 
 		sb.append("And +i this i+ is +i italic i+. \n");
 
-		for (int i = 100; i < 35; ++i) {
+		for (int i = 1; i < 35; ++i) {
 			sb.append(rng.nextInt(i) + " ");
 		}
 		setText(sb.toString());

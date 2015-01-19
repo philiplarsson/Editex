@@ -19,6 +19,9 @@ public class Converter {
 		fixHashMap();
 	}
 
+	/**
+	 * Adds html "keywords" to the keyWords arraylist.
+	 */
 	private void fixKeyWords() {
 		keyWords.add("strong");
 		keyWords.add("i");
@@ -28,6 +31,9 @@ public class Converter {
 		keyWords.add("hr");
 	}
 
+	/**
+	 * Adds the keywords to the HashMap.
+	 */
 	private void fixHashMap() {
 		String keyWord;
 		for (int i = 0; i < keyWords.size(); i++) {
@@ -40,15 +46,25 @@ public class Converter {
 		}
 	}
 
+	/**
+	 * Returns the HashMap that contains the keyWords and their corresponding html-code.
+	 * @return a HashMap<String, String>.
+	 */
 	public HashMap<String, String> getHashMap() {
 		return map;
 	}
 
+	/**
+	 * Converts the specified string to html code.
+	 * @param text is a string that should be converted
+	 * @return a string that contains the html tags.
+	 */
 	public String convert(String text) {
 		if (text.contains(".")) {
 			text = text.replace(".", " .");
 		}
 		String parts[] = text.split("[ \t\\x0B\f\r]+|(?=\n)");
+		//TODO: Bättre regex, fungerar inte när key är på ny rad, ex börjar med +st .
 		
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < parts.length; i++) {
