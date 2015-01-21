@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class Converter {
 
 	private HashMap<String, String> map = new HashMap<String, String>();
-	private final static String DELIMETER = "+";
+	private final static String DELIMETER = "§";
 	private ArrayList<String> keyWords = new ArrayList<String>();
 
 	public Converter() {
@@ -65,6 +65,7 @@ public class Converter {
 		}
 		String parts[] = text.split("[ \t\\x0B\f\r]+|(?=\n)");
 		//TODO: Bättre regex, fungerar inte när key är på ny rad, ex börjar med +st .
+		// Eller när den är ensam och det inte är något efter.
 		
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < parts.length; i++) {

@@ -97,7 +97,9 @@ public class Controller {
 				hideOrShowPanel();
 				break;
 			}
-
+			//TODO: Implements CTRL + S to save.
+			//TODO: Implements CTRL + W to close program.
+			
 		}
 
 		@Override
