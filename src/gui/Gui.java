@@ -24,7 +24,7 @@ import constants.LabelConstants;
 @SuppressWarnings("serial")
 public class Gui extends JFrame {
 
-	private static final String TITLE = "EdiOtex";
+	private static final String TITLE = "Editex";
 	private TextField textField;
 	private JButton saveButton;
 	private JButton toggleFullScreenButton;

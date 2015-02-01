@@ -16,7 +16,7 @@ public class Indexer {
 
 	private FileHandler fileHandler;
 	private List<String> lines;
-
+ 
 	public Indexer() {
 		fileHandler = new FileHandler();
 	}

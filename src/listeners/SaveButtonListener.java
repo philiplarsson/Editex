@@ -19,7 +19,7 @@ public class SaveButtonListener implements ActionListener {
 
 	public final static String LINK_FILE = "linkFile.conf";
 	private static final String FILE_NAME_ENDING_RAW = ".raw";
-	
+
 	private Gui gui;
 	private JTextField fields[];
 	private JTextField fileNameField;
@@ -27,7 +27,7 @@ public class SaveButtonListener implements ActionListener {
 	private FileHandler fileHandler;
 	private LinkHandler linkHandler;
 	private Converter converter;
-	
+
 	public SaveButtonListener(Gui gui) {
 		this.gui = gui;
 		fields = gui.getFields();
@@ -67,7 +67,6 @@ public class SaveButtonListener implements ActionListener {
 		String fileAndCourseName = courseName + "-" + fileName;
 		String entireFileName = courseName + "/" + fileAndCourseName;
 
-
 		if (fileHandler.fileExists(courseName)) {
 			System.out.println("Folder Exists!");
 		} else {
@@ -91,20 +90,23 @@ public class SaveButtonListener implements ActionListener {
 		} else {
 			// File doesn't exists
 			try {
-				fileHandler.createFile(courseName + "/" + fileAndCourseName + FILE_NAME_ENDING_RAW);
+				fileHandler.createFile(courseName + "/" + fileAndCourseName
+						+ FILE_NAME_ENDING_RAW);
 			} catch (IOException e) {
 				System.err.println("Could not create file...");
 				e.printStackTrace();
 			}
 		}
 		String text = gui.getTextField().getText();
-		text = text.replace("\n", "<br> \n");
+
 		String convertedText = converter.convert(text);
-		String htmlText = Htmlifyer.htmlIfyText(convertedText, fileAndCourseName);
+		String htmlText = Htmlifyer.htmlIfyText(convertedText,
+				fileAndCourseName);
 		try {
-			fileHandler.writeToFile(entireFileName + FILE_NAME_ENDING_RAW, text, false);
-			fileHandler.writeToFile(entireFileName + ".html", htmlText , false);
-			
+			fileHandler.writeToFile(entireFileName + FILE_NAME_ENDING_RAW,
+					text, false);
+			fileHandler.writeToFile(entireFileName + ".html", htmlText, false);
+
 			linkHandler.addLinkToLinkFile(fileAndCourseName + ".html");
 		} catch (IOException e) {
 			System.err.println("Could not save to file " + fileAndCourseName);

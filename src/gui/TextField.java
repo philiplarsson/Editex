@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.util.Random;
 
 import javax.swing.JTextPane;
 
@@ -15,7 +14,7 @@ public class TextField extends JTextPane {
 	private static final int WIDTH = 700;
 	private int topBottomPadding;
 	private int sidePadding;
-	
+
 	public TextField() {
 		super();
 		init();
@@ -25,7 +24,7 @@ public class TextField extends JTextPane {
 
 	private void init() {
 		Font font = new Font("Ubuntu", Font.PLAIN, 16);
-//		Font font = new Font("Tahomaaoeua", Font.PLAIN, 15);
+		// Font font = new Font("Tahomaaoeua", Font.PLAIN, 15);
 		setFont(font);
 		setBackground(new Color(255, 255, 245));
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -39,20 +38,18 @@ public class TextField extends JTextPane {
 	 * Test method that fills the TextField with some text and random numbers.
 	 */
 	public void fillGiberish() {
-		
-		Random rng = new Random();
+
 		StringBuilder sb = new StringBuilder();
-		sb.append("+h1 Föreläsning # h1+ \n");
-		sb.append("Line +hr \n");
+		sb.append("§h1 Föreläsning # h1§ \n");
+		sb.append("Line §hr \n");
 		sb.append("This is some fancy Text. \n");
 
-		sb.append("This is +st bold st+. \n");
+		sb.append("This is §st bold st§. \n");
 
-		sb.append("And +i this i+ is +i italic i+. \n");
+		sb.append("And §i this i§ is §i italic i§. \n");
+		sb.append("§hr\n");
+		sb.append(" This is some normal text.");
 
-		for (int i = 1; i < 35; ++i) {
-			sb.append(rng.nextInt(i) + " ");
-		}
 		setText(sb.toString());
 	}
 }

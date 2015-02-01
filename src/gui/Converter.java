@@ -2,11 +2,15 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
- * Converts string to html code. Delimiter is + for now. 
+ * Converts string to html code. Delimiter is § for now.
+ * 
  * @author phiip
- *
+ * 
  */
 public class Converter {
 
@@ -47,7 +51,9 @@ public class Converter {
 	}
 
 	/**
-	 * Returns the HashMap that contains the keyWords and their corresponding html-code.
+	 * Returns the HashMap that contains the keyWords and their corresponding
+	 * html-code.
+	 * 
 	 * @return a HashMap<String, String>.
 	 */
 	public HashMap<String, String> getHashMap() {
@@ -56,27 +62,20 @@ public class Converter {
 
 	/**
 	 * Converts the specified string to html code.
-	 * @param text is a string that should be converted
+	 * 
+	 * @param text
+	 *            is a string that should be converted
 	 * @return a string that contains the html tags.
 	 */
 	public String convert(String text) {
-		if (text.contains(".")) {
-			text = text.replace(".", " .");
+
+		Iterator<Entry<String, String>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<String, String> pairs = (Entry<String, String>) iterator
+					.next();
+			text = text.replaceAll(pairs.getKey(), pairs.getValue());
 		}
-		String parts[] = text.split("[ \t\\x0B\f\r]+|(?=\n)");
-		//TODO: Bättre regex, fungerar inte när key är på ny rad, ex börjar med +st .
-		// Eller när den är ensam och det inte är något efter.
-		
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < parts.length; i++) {
-			if (map.containsKey(parts[i])) {
-				sb.append(map.get(parts[i]));
-			} else {
-				sb.append(parts[i]);
-			}
-			sb.append(" ");
-		}
-		sb.deleteCharAt(sb.length() - 1);
-		return sb.toString();
+
+		return text;
 	}
 }
