@@ -1,9 +1,10 @@
 package gui;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -82,38 +83,120 @@ public class FileHandler {
 	 */
 	public void writeToFile(String fileName, String content, boolean append)
 			throws IOException {
-		FileOutputStream fs = new FileOutputStream(fileName);
-		OutputStreamWriter os = new OutputStreamWriter(fs, "UTF-8");
-		if (append) {
-			os.append(content);
-		} else {
-			os.write(content);
+		PrintWriter out = null;
+		try {
+			out = new PrintWriter(new BufferedWriter(new FileWriter(fileName,
+					append)));
+			out.println(content);
+		} finally {
+			out.close();
 		}
-		os.close();
-		fs.close();
+
+		/*
+		 * try(PrintWriter out = new PrintWriter(new BufferedWriter(new
+		 * FileWriter(fileName, append)))) { out.println(content); out.close();
+		 * }catch (IOException e) {
+		 * 
+		 * } /*
+		 * 
+		 * 
+		 * FileOutputStream fs = new FileOutputStream(fileName);
+		 * OutputStreamWriter os = new OutputStreamWriter(fs, "UTF-8"); if
+		 * (append) { os.append(content); } else { os.write(content); }
+		 * os.close(); fs.close();
+		 */
 	}
 
+	/**
+	 * Returns a list of strings from specified file.
+	 * 
+	 * @param fileName
+	 *            is the filename of the file.
+	 * @return a List of Strings.
+	 * @throws IOException
+	 *             if an I/O error occurs reading from the file or a malformed
+	 *             or unmappable byte sequence is read.
+	 */
 	public List<String> readLines(String fileName) throws IOException {
 		Path path = Paths.get(fileName);
 		return Files.readAllLines(path, Charset.forName("UTF-8"));
 	}
 
 	/**
-	 * Copy file from resources folder to specified destination.
-	 * @param resourceFile is the resource file name.
-	 * @param destination is the destination.
-	 * @throws IOException if copy was unsuccesfull.
+	 * Reads specified file from resources folder.
+	 * 
+	 * @param fileName
+	 *            is the filename of the resource file.
+	 * @return a List of Strings.
+	 * @throws IOException
+	 *             if an I/O error occurs reading from the file or a malformed
+	 *             or unmappable byte sequence is read.
 	 */
-	public void copyFileFromResources(String resourceFile, String destination) throws IOException {
-			File dest = new File(destination);
+	public List<String> readLinesFromResources(String fileName)
+			throws IOException {
+		ClassLoader classLoader = getClass().getClassLoader();
+		File source = null;
 
-			ClassLoader classLoader = getClass().getClassLoader();
-			File source = new File(classLoader.getResource(resourceFile)
-					.getFile());
+		try {
+			source = new File(classLoader.getResource(fileName).getFile());
+		} catch (NullPointerException e) {
+			System.err.println("Could not find " + fileName
+					+ " in resource folder.");
+			e.printStackTrace();
+		}
 
-			Files.copy(source.toPath(), dest.toPath(),
-					StandardCopyOption.REPLACE_EXISTING);
+		return Files.readAllLines(source.toPath(), Charset.forName("UTF-8"));
+	}
 
-		
+	/**
+	 * Adds line to resource file with specified file name.
+	 * 
+	 * @param fileName
+	 *            the name of the resource file.
+	 * @param line
+	 *            is the String to be added.
+	 */
+	public void addLineToResourceFile(String fileName, String line) {
+		ClassLoader classLoader = getClass().getClassLoader();
+		File dest = null;
+
+		try {
+			dest = new File(classLoader.getResource(fileName).getFile());
+		} catch (NullPointerException e) {
+			System.err.println("Could not find " + fileName
+					+ " in resource folder.");
+			e.printStackTrace();
+		}
+		try {
+			writeToFile(dest.toString(), line, true);
+		} catch (IOException e) {
+			System.err.println("Could not write to file "
+					+ dest.getAbsolutePath());
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * Copy file from resources folder to specified destination.
+	 * 
+	 * @param resourceFile
+	 *            is the resource file name.
+	 * @param destination
+	 *            is the destination.
+	 * @throws IOException
+	 *             if copy was unsuccesfull.
+	 */
+	public void copyFileFromResources(String resourceFile, String destination)
+			throws IOException {
+		File dest = new File(destination);
+
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		File source = new File(classLoader.getResource(resourceFile).getFile());
+
+		Files.copy(source.toPath(), dest.toPath(),
+				StandardCopyOption.REPLACE_EXISTING);
+
 	}
 }
